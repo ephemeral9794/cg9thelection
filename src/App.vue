@@ -1,7 +1,10 @@
 <template>
 	<v-app>
 		<v-app-bar app color="primary" dark>
-			<span class="mr-2">第9回シンデレラガール総選挙 出口調査集計</span>
+			<span><img src="./assets/favicon.png" alt=""/></span>
+			<v-toolbar-title
+				>第9回シンデレラガール総選挙 出口調査集計
+			</v-toolbar-title>
 		</v-app-bar>
 
 		<v-content>
