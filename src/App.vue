@@ -9,7 +9,7 @@
 
 		<v-content>
 			<v-container>
-				<v-card>
+				<v-card >
 					<v-select
 						v-model="select"
 						:items="states"
@@ -22,6 +22,10 @@
 						:items="items"
 						:loading="loading"
 						:items-per-page="50"
+						:footer-props="{
+							nextIcon: 'mdi-chevron-right',
+							prevIcon: 'mdi-chevron-left'
+						}"
 					>
 						<template v-slot:item.rank="{ item }">
 							{{ item.rank }}位
@@ -88,8 +92,6 @@ export default defineComponent({
 					{ params: { p: p } }
 				)
 				.then(res => {
-					console.log(res.data);
-					//var values = JSON.parse(res.data)
 					items.value = res.data.map((item: Result) => {
 						return {
 							rank: item.rank,
