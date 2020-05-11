@@ -9,7 +9,7 @@
 
 		<v-content>
 			<v-container>
-				<v-card >
+				<v-card>
 					<v-select
 						v-model="select"
 						:items="states"
@@ -84,6 +84,7 @@ export default defineComponent({
 		]);
 		const select = ref("cinderella");
 
+		// データ取得
 		const getData = async (p: string) => {
 			loading.value = true;
 			await axios
@@ -92,14 +93,19 @@ export default defineComponent({
 					{ params: { p: p } }
 				)
 				.then(res => {
-					items.value = res.data.map((item: Result) => {
-						return {
-							rank: item.rank,
-							name: item.name,
-							type: item.type,
-							total: item.sum
-						};
-					});
+					// 降順にソート後、マッピング
+					items.value = res.data
+						.sort((a: Result, b: Result) => {
+							return b.sum - a.sum;
+						})
+						.map((item: Result, index: number) => {
+							return {
+								rank: index + 1,
+								name: item.name,
+								type: item.type,
+								total: item.sum
+							};
+						});
 					loading.value = false;
 				})
 				.catch(e => {
